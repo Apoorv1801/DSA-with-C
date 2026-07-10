@@ -1,0 +1,60 @@
+#include <stdio.h>
+int main()
+{
+struct node
+{
+int num;
+struct node *next;
+};
+struct node *head,*newnode,*temp,*prevnode;
+head = 0;
+int choice = 1;
+while(choice)
+{
+newnode = (struct node *)malloc(sizeof(struct node));
+printf("\nEnter a number:");
+scanf("%d",&newnode -> num);
+newnode -> next = 0;
+if(head==0)
+{
+head = temp = newnode;
+}
+else
+{
+temp -> next = newnode;
+temp = newnode;
+}
+printf("\nPress (1) to add elements OR (0) to end:");
+scanf("%d",&choice);
+}
+printf("\nLinked List Before Deletion:- \n");
+temp = head;
+while(temp!=0)
+{
+printf("%d ",temp -> num);
+temp = temp -> next;
+}
+temp = head;
+while(temp -> next != 0)
+{
+prevnode = temp;
+temp = temp -> next;
+}
+if(temp==head)
+{
+head = 0;
+}
+else
+{
+prevnode -> next = 0;
+}
+free(temp);
+printf("\nLinked List After Deletion:- \n");
+temp = head;
+while(temp!=0)
+{
+printf("%d ",temp -> num);
+temp = temp -> next;
+}
+return 0;
+}

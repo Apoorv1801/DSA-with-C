@@ -1,0 +1,84 @@
+void itpost(char source[], char target[])
+ {
+ int i=0, j=0;
+ char temp;
+ strcpy(target,"");
+ while(source[i]!='\0')
+ {
+    if(source[i]==')')
+    {
+        push(stack,source[i]);
+        i++;
+    }
+    else if(source[i] == '(')
+    {
+        while((top != -1) && (stack[top]!=')'))
+        {
+            target[j] = pop(stack);
+            j++;
+        }
+    if(top == -1)
+    {
+        printf("\n INCORRECT EXPRESSION");
+        exit(1);
+    }
+    temp = pop(stack);//remove left parenthesis
+    i++;
+    }
+    else if(isalnum(source[i]))
+    {
+        target[j] = source[i];
+        j++;
+        i++;
+    }
+    else if (source[i] == '+' || source[i] == '-' || source[i] == '*' ||
+    source[i] == '/' || source[i] == '^')
+    {
+            if(priority(source[i]) == 3)
+             {
+                push(stack,source[i]);
+                i++;
+             }
+            else if(priority(stack[top]) == priority(source[i]) == 3)
+            {
+                target[j] = pop(stack);
+                j++;
+                push(stack,source[i]);
+                i++;
+            }
+            else if(priority(stack[top]) > priority(source[i]))
+            {
+                while((top != -1) && (stack[top]!= ')') && (priority(stack[top])
+                > priority(source[i])))
+                {
+                target[j] = pop(stack);
+                j++;
+                }
+            }
+            else
+            {
+                while((top != -1) && (stack[top]!= ')') && (priority(stack[top])
+                == priority(source[i])))
+                {
+                    target[j] = pop(stack);
+                    j++;
+                }
+            }
+            push(stack, source[i]);
+            i++;
+
+    }
+    else
+    {
+        printf("\n INCORRECT ELEMENT IN EXPRESSION");
+        exit(1);
+    }
+ }
+    while((top != -1) && (stack[top]!='('))
+    {
+        target[j] = pop(stack);
+        j++;
+    }
+    target[j]='\0';
+ }
+
